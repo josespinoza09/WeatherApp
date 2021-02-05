@@ -37,7 +37,7 @@ async function getSearch() {
   if (!exist) {
     savedCities.push(search)
     document.querySelector('#cityList').innerHTML += `
-    <li><button type="button" class="btn btn-light" onClick=getApi('${search}')>${search}</li>`
+    <li><button type="button" class="btn btn-light" style="border-color:black" onClick=getApi('${search}')>${search}</li>`
     localStorage.savedCities = JSON.stringify(savedCities)
   }
 }
