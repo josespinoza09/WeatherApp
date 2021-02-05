@@ -10,8 +10,8 @@ var date = moment().format("MMM Do YY");
 let savedCities = localStorage.savedCities ? JSON.parse(localStorage.savedCities) : [];
 if (savedCities.length > 0) {
   for (let i = 0; i < savedCities.length; i++) {
-    document.querySelector('#cityList').innerHTML += 
-    `<li><button type="button" class="btn btn-light" onClick=getSearch('${savedCities[i]}')>${savedCities[i]}</li>`
+    document.querySelector('#cityList').innerHTML +=
+      `<li><button type="button" class="btn btn-light" onClick=getSearch('${savedCities[i]}')>${savedCities[i]}</li>`
   }
 }
 //get search and display
@@ -32,7 +32,7 @@ async function getSearch() {
       break;
     }
   }
-  
+
   //adds cities to saved list 
   if (!exist) {
     savedCities.push(search)
@@ -44,8 +44,8 @@ async function getSearch() {
 async function getApi(city) {
   //Clears search before adding new cards
   document.querySelector('#currentWeather').innerHTML = "";
-  document.querySelector('#forecast').innerHTML = "";
-  //url's needed for the api's
+  document.querySelector('#forecast').innerHTML = ""
+  // url's needed for the api's
   var searchUrl = ` http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=a40946fd9d2010f2fa6e5550cbf15f24&units=metric`
   var searchForecast = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=a40946fd9d2010f2fa6e5550cbf15f24&units=metric`
   //fetch info from api
@@ -66,7 +66,7 @@ function displayData(weatherInfo, weatherforecast, uv) {
   } else {
     color = "danger"
   }
-  //Weather Icon
+  // Weather Icon
   var iconUrl = `http://openweathermap.org/img/w/${weatherInfo.weather.icon}.png`
   //Display cards
   document.querySelector('#currentWeather').innerHTML += `
@@ -91,9 +91,9 @@ function displayData(weatherInfo, weatherforecast, uv) {
               <p class="card-text">Humidity: ${weatherforecast.list[i].main.humidity}%</p>
             </div>
           </div>`
+ }
   }
-}
-function clearHistory() {
-  localStorage.removeItem('savedCities');
-  document.querySelector('#cityList').innerHTML = "";
+    function clearHistory() {
+    localStorage.removeItem('savedCities');
+     document.querySelector('#cityList').innerHTML = "";
 }
