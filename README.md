@@ -1,4 +1,6 @@
 # WeatherApp
+Webpage Link: https://josespinoza09.github.io/WeatherApp/
+
 Description:
 This application displays a weather dashboard with form inputs
 When the user search for a city
@@ -11,3 +13,5 @@ Then is presented with a 5-day forecast that displays the date, an icon represen
 When the user clicks on a city in the search history
 Then is again presented with current and future conditions for that city
 
+Screenshot:
+![WeatherApp](img/weatherapp.png?raw=true)

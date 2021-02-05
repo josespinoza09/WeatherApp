@@ -6,12 +6,13 @@ var uvValue
 //Dates 
 var date = moment().format("MMM Do YY");
 
-//Loads saved cities
+
 let savedCities = localStorage.savedCities ? JSON.parse(localStorage.savedCities) : [];
+
 if (savedCities.length > 0) {
   for (let i = 0; i < savedCities.length; i++) {
     document.querySelector('#cityList').innerHTML +=
-      `<li><button type="button" class="btn btn-light" onClick=getSearch('${savedCities[i]}')>${savedCities[i]}</li>`
+`<li><button type="button" class="btn btn-light" style="border-color:black" onClick=getApi('${savedCities[i]}')>${savedCities[i]}</li>`
   }
 }
 //get search and display
