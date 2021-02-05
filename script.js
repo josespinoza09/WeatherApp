@@ -6,7 +6,41 @@ var uvValue
 //Dates 
 var date = moment().format("MMM Do YY");
 
-
+//Loads saved cities
+let savedCities = localStorage.savedCities ? JSON.parse(localStorage.savedCities) : [];
+if (savedCities.length > 0) {
+  for (let i = 0; i < savedCities.length; i++) {
+    document.querySelector('#cityList').innerHTML += 
+    `<li><button type="button" class="btn btn-light" onClick=getSearch('${savedCities[i]}')>${savedCities[i]}</li>`
+  }
+}
+//get search and display
+async function getSearch() {
+  // Clears search before running
+  document.querySelector('#currentWeather').innerHTML = "";
+  document.querySelector('#forecast').innerHTML = "";
+  //fetch search input
+  var search = document.querySelector('#search').value
+  search = search[0].toUpperCase() + search.substring(1);
+  //Api request
+  getApi(search)
+  //check if city already exist in list
+  let exist = false;
+  for (let i = 0; i < savedCities.length; i++) {
+    if (search === savedCities[i]) {
+      exist = true;
+      break;
+    }
+  }
+  
+  //adds cities to saved list 
+  if (!exist) {
+    savedCities.push(search)
+    document.querySelector('#cityList').innerHTML += `
+    <li><button type="button" class="btn btn-light" onClick=getApi('${search}')>${search}</li>`
+    localStorage.savedCities = JSON.stringify(savedCities)
+  }
+}
 async function getApi(city) {
   //Clears search before adding new cards
   document.querySelector('#currentWeather').innerHTML = "";
