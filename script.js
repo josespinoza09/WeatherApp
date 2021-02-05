@@ -22,3 +22,40 @@ async function getApi(city) {
   displayData(searchData, searchDataForecast, uvValue)
 }
 
+function displayData(weatherInfo, weatherforecast, uv) {
+  //checks uv conditions
+  let color = ""
+  if (uvValue.value <= 2) {
+    color = "success"
+  } else if (uvValue.value <= 7) {
+    color = "warning"
+  } else {
+    color = "danger"
+  }
+  //Weather Icon
+  var iconUrl = `http://openweathermap.org/img/w/${weatherInfo.weather.icon}.png`
+  //Display cards
+  document.querySelector('#currentWeather').innerHTML += `
+            <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">${weatherInfo.name} ${date} <img id='weatherIcon' src="http://openweathermap.org/img/w/${weatherInfo.weather[0].icon}.png"> </h5>
+              <p class="card-text">Temperature: ${weatherInfo.main.temp}°C</p>
+              <p class="card-text">Humidity: ${weatherInfo.main.humidity}%</p>
+              <p class="card-text">Wind Speed: ${weatherInfo.wind.speed}MPH</p>
+              <p class="card-text" style="width:15% ; background-color:">UV Index: <button type="button" class="btn btn-${color}">${uv.value}</button></p>
+            </div>
+          </div>`
+  document.querySelector('#forecast').innerHTML += `<div class="col"><h3>5-Day Forecast:</h3></div>`
+  for (var i = 0; i < 5; i++) {
+    date = moment().add(i + 1, 'days').format("MMM Do YY");
+    document.querySelector('#forecast').innerHTML += `
+            <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">${date}</h5>
+              <img id='weatherIcon' src="http://openweathermap.org/img/w/${weatherforecast.list[i].weather[0].icon}.png">
+              <p class="card-text">Temp: ${weatherforecast.list[i].main.temp}°C</p>
+              <p class="card-text">Humidity: ${weatherforecast.list[i].main.humidity}%</p>
+            </div>
+          </div>`
+  }
+}
