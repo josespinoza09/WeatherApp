@@ -93,3 +93,7 @@ function displayData(weatherInfo, weatherforecast, uv) {
           </div>`
   }
 }
+function clearHistory() {
+  localStorage.removeItem('savedCities');
+  document.querySelector('#cityList').innerHTML = "";
+}
