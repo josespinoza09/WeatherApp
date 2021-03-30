@@ -59,6 +59,7 @@ async function queryAPI(city) {
         errMessage = weather.message;
         errCaught = true;
     }
+
     let uvInfo = await fetch(`https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${apiKey}`)
     .then( r => r.json()).catch(() => console.error('UV Info Error'));
     if (uvInfo) handleUV(uvInfo);
@@ -70,12 +71,12 @@ async function queryAPI(city) {
         errMessage = forecast.message;
         errCaught = true;
     }
-    // Handle error
+    // Handle errors
     if (errCaught) alert(`Error ${errCode}: ${errMessage}`);
 }
 
 function handleWeather(obj) {
-    // print to HTML
+    // print weather to HTML
     document.querySelector('#cityName').innerHTML = `${obj.name}, ${obj.sys.country}'s `;
     document.querySelector('#weatherInfo').innerHTML =
     `<li>Weather: ${obj.weather[0].main}</li>
